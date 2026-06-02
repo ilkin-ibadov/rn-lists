@@ -1,13 +1,15 @@
 import { useRouter } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { Pressable, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { useMMKVBoolean } from 'react-native-mmkv'
 
 export default function HomeScreen() {
+  const [darkmode, setDarkmode] = useMMKVBoolean('darkmode')
   const router = useRouter()
 
   return (
-    <View className="flex-1 items-center justify-center bg-slate-100 dark:bg-slate-900">
-      <View className="mx-6 rounded-2xl bg-white p-8 shadow-lg dark:bg-slate-800">
+    <View className={`flex-1 items-center justify-center ${darkmode ? "bg-black" : "bg-white"}`}>
+      <View className="mx-6 rounded-2xl p-8 shadow-lg dark:bg-slate-800">
         <Text className="mb-2 text-center text-3xl font-bold text-red-600 dark:text-white">
           NativeWind
         </Text>
@@ -17,6 +19,14 @@ export default function HomeScreen() {
         <TouchableOpacity onPress={() => {router.push('/register')}} className="rounded-xl bg-blue-500 px-6 py-3 active:bg-blue-600">
           <Text className="text-center text-base font-semibold text-white">
             Go to register page
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => {
+         setDarkmode(prevState => !prevState)
+        }} className="rounded-xl bg-blue-500 px-6 py-3 mt-5 active:bg-blue-600">
+          <Text className="text-center text-base font-semibold text-white">
+            {darkmode ? "Disable" : "Enable"} Dark mode
           </Text>
         </TouchableOpacity>
       </View>
