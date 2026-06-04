@@ -14,8 +14,6 @@ const Login = () => {
         password: ''
     })
 
-    const router = useRouter()
-
     const validate = () => {
 
         if (!formData.username) {

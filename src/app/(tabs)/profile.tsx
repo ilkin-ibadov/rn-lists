@@ -1,16 +1,14 @@
 import { StyledText, StyledView } from '@/components/StyledComponents'
 import { Button } from 'react-native'
-import { useMMKVString } from 'react-native-mmkv'
+import { useAuth } from '@/hooks/useAuth'
 
 const Profile = () => {
-  const [accessToken, setAccessToken] = useMMKVString('accessToken')
+  const { logout } = useAuth()
 
   return (
     <StyledView>
       <StyledText>Profile page</StyledText>
-      <Button onPress={() => {
-        setAccessToken('')
-      }} title={'Log out'} />
+      <Button onPress={logout} title={'Log out'} />
     </StyledView>
   )
 }
