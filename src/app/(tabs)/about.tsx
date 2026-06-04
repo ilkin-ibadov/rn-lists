@@ -1,6 +1,5 @@
 import { Link } from 'expo-router'
-import StyledText from '@/components/StyledText'
-import StyledView from '@/components/StyledView'
+import { StyledText, StyledView } from '@/components/StyledComponents'
 
 
 const About = () => {

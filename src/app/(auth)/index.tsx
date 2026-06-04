@@ -2,10 +2,9 @@ import { useRouter } from 'expo-router'
 import { useState } from 'react'
 import { Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller'
-import { useMMKVString } from 'react-native-mmkv'
+import { login } from '@/api/auth'
 
 const Login = () => {
-    const [accessToken, setAccessToken] = useMMKVString('accessToken')
     const [formData, setFormData] = useState({
         username: '',
         password: ''
@@ -38,22 +37,6 @@ const Login = () => {
         setFormData(prevState => ({ ...prevState, [name]: value }))
     }
 
-    const login = async () => {
-        try {
-            const res = await fetch("https://dummyjson.com/user/login", {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData),
-            })
-            const data = await res.json()
-
-            setAccessToken(data.accessToken)
-            router.push('/(tabs)')
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
     const handleSubmit = () => {
         setErrors({
             username: '',
@@ -64,7 +47,7 @@ const Login = () => {
             return
         }
 
-       login()
+        login(formData)
     }
 
     return (

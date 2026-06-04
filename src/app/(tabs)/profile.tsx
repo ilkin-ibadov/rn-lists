@@ -1,5 +1,4 @@
-import StyledView from '@/components/StyledView'
-import StyledText from '@/components/StyledText'
+import { StyledText, StyledView } from '@/components/StyledComponents'
 import { Button } from 'react-native'
 import { useMMKVString } from 'react-native-mmkv'
 
