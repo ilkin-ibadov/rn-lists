@@ -2,6 +2,7 @@ import { Text, View } from 'react-native'
 import { StyledText, StyledView } from '@/components/StyledComponents'
 import { getCurrentUser } from '@/api/users'
 import { useEffect, useState } from 'react'
+import React from 'react'
 
 const User = () => {
   const [user, setUser] = useState({})

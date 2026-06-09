@@ -1,6 +1,7 @@
 import { StyledText, StyledView } from '@/components/StyledComponents'
 import { Button } from 'react-native'
 import { useAuth } from '@/hooks/useAuth'
+import React from 'react'
 
 const Profile = () => {
   const { logout } = useAuth()
