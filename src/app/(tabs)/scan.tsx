@@ -44,9 +44,6 @@ const Scan = () => {
             <CameraView
               style={{ width: 300, height: 300 }}
               facing='back'
-              barcodeScannerSettings={{
-                barcodeTypes: ['qr', 'aztec', 'codabar', 'code128', 'code39', 'code93', 'datamatrix', 'ean13', 'ean8', 'itf14', 'pdf417', 'upc_a', 'upc_e']
-              }}
               onBarcodeScanned={scanned ? undefined : handleScan}
             />
             {

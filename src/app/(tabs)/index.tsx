@@ -1,37 +1,40 @@
-import { useRouter } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { useMMKVBoolean } from 'react-native-mmkv'
+import React, { useEffect, useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { FlashList } from "@shopify/flash-list";
+import ProductCard from '@/components/ProductCard';
+import SectionListComponent from '@/components/SectionList';
 
 export default function HomeScreen() {
-  const [darkmode, setDarkmode] = useMMKVBoolean('darkmode')
-  const router = useRouter()
+  const [products, setProducts] = useState([])
+
+  const getProducts = async () => {
+    try {
+      const res = await fetch('https://dummyjson.com/products')
+      const data = await res.json()
+      setProducts(data.products)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const Seperator = () => {
+    return (
+      <View className='h-2 w-2'></View>
+    )
+  }
+
+  useEffect(() => {
+    getProducts()
+  }, [])
 
   return (
-    <View className={`flex-1 items-center justify-center ${darkmode ? "bg-black" : "bg-white"}`}>
-      <View className="mx-6 rounded-2xl p-8 shadow-lg dark:bg-slate-800">
-        <Text className="mb-2 text-center text-3xl font-bold text-red-600 dark:text-white">
-          NativeWind
-        </Text>
-        <Text className="mb-6 text-center text-base text-slate-600 dark:text-slate-300">
-          Expo SDK 56 + Tailwind CSS
-        </Text>
-        <TouchableOpacity onPress={() => {router.push('/user')}} className="rounded-xl bg-blue-500 px-6 py-3 active:bg-blue-600">
-          <Text className="text-center text-base font-semibold text-white">
-            Go to user page
-          </Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => {
-         setDarkmode(prevState => !prevState)
-        }} className="rounded-xl bg-blue-500 px-6 py-3 mt-5 active:bg-blue-600">
-          <Text className="text-center text-base font-semibold text-white">
-            {darkmode ? "Disable" : "Enable"} Dark mode
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <StatusBar style="auto" />
-    </View>
+    <FlashList
+      className='p-2'
+      numColumns={2}
+      // ItemSeparatorComponent={Seperator}
+      data={products}
+      renderItem={({ item }) => <ProductCard item={item} />}
+      keyExtractor={(item) => item.id}
+    />
   );
 }
