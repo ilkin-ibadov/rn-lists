@@ -1,33 +1,23 @@
 import "../../global.css"
-import { Stack, useRouter } from "expo-router";
-import { KeyboardProvider } from "react-native-keyboard-controller";
-import { StatusBar } from "expo-status-bar";
-import { useMMKVBoolean } from 'react-native-mmkv'
-import { useEffect } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
-import { useAuth } from "@/hooks/useAuth";
+import React from "react";
+import { Stack } from "expo-router";
+import { useMMKVBoolean } from "react-native-mmkv"
 
 export default function RootLayout() {
-  const { isAuthenticated } = useAuth()
   const [darkmode, setDarkmode] = useMMKVBoolean('darkmode')
-
-  const router = useRouter()
-
-  useEffect(() => {
-    router.replace(isAuthenticated ? '/(tabs)' : '/(auth)')
-  }, [isAuthenticated])
 
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{ flex: 1 }}>
-        <KeyboardProvider>
-          <Stack screenOptions={{ headerStyle: { backgroundColor: 'black' } }}>
-            <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="user" options={{ headerShown: false }} />
-          </Stack>
-          <StatusBar style={darkmode ? "light" : "dark"} />
-        </KeyboardProvider>
+        <Stack screenOptions={{ headerStyle: { backgroundColor: darkmode ? "black" : "white" }, headerTitleStyle: { color: darkmode ? "white" : "black" } }}>
+          <Stack.Screen name="index" options={{ headerShown: false }} />
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="details" options={{ title: "Details" }} />
+          <Stack.Screen name="register" options={{ title: "Register" }} />
+          <Stack.Screen name="editinfo" options={{ title: "Edit User" }} />
+          <Stack.Screen name="addcart" options={{ title: "Add Cart" }} />
+        </Stack>
       </SafeAreaView>
     </SafeAreaProvider>
   );
