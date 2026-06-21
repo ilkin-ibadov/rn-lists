@@ -43,6 +43,18 @@ const Profile = () => {
       }} className='bg-black py-4 rounded-xl'>
         <Text className='text-white text-center'>{darkmode ? "Disable" : "Enable"} Darkmode</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => {
+        router.push('/login')
+      }} className='bg-black py-4 rounded-xl'>
+        <Text className='text-white text-center'>Go to login</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity onPress={() => {
+        router.push('/userDetails')
+      }} className='bg-black py-4 rounded-xl'>
+        <Text className='text-white text-center'>Go to user info</Text>
+      </TouchableOpacity>
     </StyledView>
   )
 }

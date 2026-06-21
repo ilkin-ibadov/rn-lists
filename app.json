@@ -33,7 +33,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow Axios to access your camera to scan QR"
+          "cameraPermission": "Allow Expo to access your camera to scan QR"
         }
       ],
       [

@@ -15,8 +15,10 @@ export default function RootLayout() {
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="details" options={{ title: "Details" }} />
           <Stack.Screen name="register" options={{ title: "Register" }} />
+          <Stack.Screen name="login" options={{ title: "Login" }} />
           <Stack.Screen name="editinfo" options={{ title: "Edit User" }} />
           <Stack.Screen name="addcart" options={{ title: "Add Cart" }} />
+          <Stack.Screen name="userDetails" options={{ title: "User details" }} />
         </Stack>
       </SafeAreaView>
     </SafeAreaProvider>
